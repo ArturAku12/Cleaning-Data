@@ -1,0 +1,51 @@
+---
+title: "Code book"
+author: "Artur Akulenko"
+date: "11/19/2020"
+output: html_document
+---
+
+## Cleaning Up Data - Wearable Computing Data Cleaning
+
+This is the code book, which is going to describe all the data used as well as the steps undertaken to cleanup the data in the run_analysis.R file. The README.txt file is the original one attached to the dataset.
+
+## Introduction to the dataset 
+License: [1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+
+The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
+
+The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See 'features_info.txt' for more details. 
+
+## Datasets Themselves
+
+- 'features.txt': List of all features. Connects the number the number labels found in y_train and y_test to the description of the measurement taken. This was used to name the columns of the most bulk of the data (such as means and standard deviations of different measurements)
+
+- 'x_train.txt' and 'x_test.txt' - the bulk of the data containing different physical measurements taken.
+
+- 'subject_train.txt' and 'subject_text.txt': contains the subject numerical labels, can be thought of as tracking id (ranges from 1-30, which reflects the amount of participants).
+
+- 'y-test.txt' and 'y-train.txt' - has the id's of the 
+- 'activity_labels.txt' - contains the equivalents of the numerical labels in the y_ files
+and is used to convert the numerical label into the activity type label (such as 'walking', 'sitting', 'laying', etc.)
+
+## Approach to creating the data set
+The general understanding is that the table should a row which look somewhat like this:
+
+    (subject id) | (activity label) | first measurement | etc.
+For example:
+
+    2 | standing | 2313345.07123 | etc.
+    
+With this understanding in place, the script run_analysis.R is highly commented and explains most of the steps. Below is the approach and general strategy that was approached in order to create the dataset:
+
+1. Combine the test and train datasets, placing the test values on top of train values and keeping that consistent
+2. Transforming the activity number labels into real descriptive labels
+3. Renaming the columns of the main bulk of the dataset using the features.txt labels.
+4. Combining the dataframe after completing the previous steps.
+5. Selecting only the columns which contain either mean() or std().
+6. Cleaning up the labels of the columns to make them more readable.
+7. Extract from the dataset using the aggregate function, a neat summary of the mean values of measurements per participant per activity label.
+
+
+## Units
+The units of the tables are physical measurements typically used for measurement of different physical measurements, thus units will not be listed here due to the high quantity of them.
